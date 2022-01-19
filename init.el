@@ -1,10 +1,10 @@
 ;;; init.el --- My init.el  -*- lexical-binding: t; -*-
+
 ;;; Commentary:
 
 ;; My init.el.
 
 ;;; Code:
-
 (eval-and-compile
   (when (or load-file-name byte-compile-current-file)
     (setq user-emacs-directory
@@ -20,7 +20,14 @@
   (unless (package-installed-p 'leaf)
     (package-refresh-contents)
     (package-install 'leaf))
-                                                                                        
+ (leaf leaf-keywords
+    :ensure t
+
+    :config
+    ;; initialize leaf-keywords.el
+    (leaf-keywords-init)))
+
+ 
 ;; coding UFT8
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -87,22 +94,7 @@
 
 ;; 大文字・小文字を区別しない
 (setq case-fold-search t)
-;;
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(avy doom-modeline dashboard tree-sitter-langs tree-sitter flycheck use-package package-utils rainbow-mode company neotree))
- '(show-paren-mode t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Ricty Diminished" :foundry "outline" :slant normal :weight normal :height 109 :width normal))))
- '(doom-modeline-bar ((t (:background "#6272a4")))))
+
 
 
 ;;Company-mode
@@ -210,5 +202,12 @@
   (bind-key "M-g M-f" 'avy-goto-line)
   (bind-key "M-g M-d" 'avy-goto-word-0)
   (bind-key "C-:" 'avy-goto-char))
-  
+
+
+  (provide 'init)
+
+;; Local Variables:
+;; indent-tabs-mode: nil
+;; End:
+
 ;;; init.el ends here
