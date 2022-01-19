@@ -1,5 +1,4 @@
-;;; package --- Summar
-
+;;; init.el --- My init.el  -*- lexical-binding: t; -*-
 ;;; Commentary:
 
 ;; My init.el.
