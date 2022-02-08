@@ -40,19 +40,7 @@
 
 ;;カラーテーマ
   
-     (leaf doom-themes
-    :when window-system
-    :ensure t
-    :custom
-    (doom-themes-enable-italic t)
-    (doom-themes-enable-bold t)
-    :custom-face
-    (doom-modeline-bar ((t (:background "#6272a4"))))
-    :config
-    (load-theme 'doom-dracula t)
-    
-    (doom-themes-org-config))
-   
+  
 
 
 
@@ -78,13 +66,13 @@
 ;; リージョンのハイライト
 (transient-mark-mode 1)
 ;; current directory 表示
-;;(let ((ls (member 'mode-line-buffer-identification
-;;                mode-line-format)))
-;;  (setcdr ls
-;;    (cons '(:eval (concat " ("
-;;          (abbreviate-file-name default-directory)
-;;      ")"))
-;;        (cdr ls))))
+(let ((ls (member 'mode-line-buffer-identification
+                mode-line-format)))
+  (setcdr ls
+    (cons '(:eval (concat " ("
+          (abbreviate-file-name default-directory)
+      ")"))
+        (cdr ls))))
 
 
 ;; *.~  バックアップファイルを作らない
@@ -94,27 +82,6 @@
 
 ;; 大文字・小文字を区別しない
 (setq case-fold-search t)
-
-
-
-;;Company-mode
-(leaf company :ensure t
-:hook
-(after-init-hook . global-company-mode)
-:custom
-(setq company-idle-delay 0.3)
-(setq company-minimum-prefix-length 1))
-
-
-;; 候補に番号を付け、
-;; M-1やM-2などM-をつけて押すことで候補選択をショートカットできる
-(setq company-show-quick-access t)
-
-;; 候補の一番下でさらに下に行こうとすると一番上に戻る
-(setq company-selection-wrap-around t)
-
-;; ツールチップ上の候補を右揃え
-(setq company-tooltip-align-annotations t)
 
 
 
@@ -131,10 +98,10 @@
   (setq neo-create-file-auto-open t)
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (bind-key [f8] 'neotree-toggle)
-  (bind-key "RET" 'neotree-enter-hide neotree-mode-map)
-  (bind-key "a" 'neotree-hidden-file-toggle neotree-mode-map)
-  (bind-key "<left>" 'neotree-select-up-node neotree-mode-map)
-  (bind-key "<right>" 'neotree-change-root neotree-mode-map))
+  (bind-key "RET" 'neotree-enter-hide )
+  (bind-key "a" 'neotree-hidden-file-toggle )
+  (bind-key "<left>" 'neotree-select-up-node )
+  (bind-key "<right>" 'neotree-change-root ))
 
 
 ;; Change neotree's font size
@@ -169,33 +136,10 @@
 ;; scratchの初期メッセージ消去
 (setq initial-scratch-message "")
 
-;;(require 'tree-sitter-langs)
-;;(require 'tree-sitter)
-
-;;(global-tree-sitter-mode)
-;;(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-
-(leaf tree-sitter :ensure t 
- :init
- (global-tree-sitter-mode)
- :hook
- (tree-sitter-after-on-hook . tree-sitter-hl-mode)
- :config
- (leaf tree-sitter-langs :ensure t))
-
 (leaf dashboard
   :ensure t
   :config
   (dashboard-setup-startup-hook))
-
-(leaf doom-modeline
-  :when window-system
-  :ensure t
-  :custom
-  (doom-modeline-buffer-file-name-style 'truncate-with-project)
-  
-  :hook
-  (after-init . doom-modeline-mode))
 
 (leaf avy :ensure t
   :config
@@ -206,7 +150,20 @@
 
   (provide 'init)
 
-;; Local Variables:
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(bind-key avy doom-modeline dashboard tree-sitter flycheck neotree company leaf-keywords leaf)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+ ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:
 
